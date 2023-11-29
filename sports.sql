@@ -34,6 +34,7 @@ CREATE TABLE IF NOT EXISTS sports.players (
 CREATE TABLE IF NOT EXISTS sports.player_stats_nba (
   id INT PRIMARY KEY,
   player_id INT NOT NULL,
+  year VARCHAR(50) NOT NULL,
   games_played INT NOT NULL,
   points_per_game INT NOT NULL,
   assists_per_game INT NOT NULL,
