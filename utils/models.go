@@ -37,10 +37,10 @@ type Scores struct {
 }
 
 type GameScore struct {
-	ID        int       `json:"id"`
-	HomeTeam  string    `json:"home_team"`
-	AwayTeam  string    `json:"away_team"`
-	GameDate  time.Time `json:"game_date"`
-	HomeScore int       `json:"home_score"`
-	AwayScore int       `json:"away_score"`
+	ID        int    `json:"id"`
+	HomeTeam  string `json:"home_team"`
+	AwayTeam  string `json:"away_team"`
+	GameDate  string `json:"game_date"`
+	HomeScore int    `json:"home_score"`
+	AwayScore int    `json:"away_score"`
 }

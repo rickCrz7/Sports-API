@@ -32,7 +32,7 @@ func (dao *ScoresDaoImpl) createScore(score *utils.Scores) error {
 
 func (dao *ScoresDaoImpl) updateScore(score *utils.Scores) error {
 	log.Println("updateScore")
-	_, err := dao.conn.Exec("UPDATE scores SET home_score=?, away_score=? WHERE id=?", score.HomeScore, score.AwayScore, score.ID)
+	_, err := dao.conn.Exec("UPDATE scores SET home_score=?, away_score=? WHERE game_id=?", score.HomeScore, score.AwayScore, score.GameID)
 	if err != nil {
 		return err
 	}

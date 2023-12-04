@@ -33,8 +33,8 @@ func (dao *DaoImpl) getGames() ([]*utils.GameScore, error) {
     t1.team_name AS home_team, 
     t2.team_name AS away_team, 
     g.game_date, 
-    s.home_score, 
-    s.away_score
+    COALESCE(s.home_score, 0) AS home_score, 
+    COALESCE(s.away_score, 0) AS away_score
 	FROM 
     sports.games g
 	JOIN 
@@ -68,8 +68,8 @@ func (dao *DaoImpl) getGameByID(id int) (*utils.GameScore, error) {
     t1.team_name AS home_team, 
     t2.team_name AS away_team, 
     g.game_date, 
-    s.home_score, 
-    s.away_score
+    COALESCE(s.home_score, 0) AS home_score, 
+    COALESCE(s.away_score, 0) AS away_score
 	FROM 
     sports.games g
 	JOIN 
@@ -79,7 +79,7 @@ func (dao *DaoImpl) getGameByID(id int) (*utils.GameScore, error) {
 	Left JOIN 
     sports.scores s ON g.id = s.game_id
 	where
-    g.id= 1`, id).Scan(&game.ID, &game.HomeTeam, &game.AwayTeam, &game.GameDate, &game.HomeScore, &game.AwayScore)
+    g.id=?`, id).Scan(&game.ID, &game.HomeTeam, &game.AwayTeam, &game.GameDate, &game.HomeScore, &game.AwayScore)
 	if err != nil {
 		return nil, err
 	}
@@ -94,8 +94,8 @@ func (dao *DaoImpl) getGamesByTeamID(id int) ([]*utils.GameScore, error) {
     t1.team_name AS home_team, 
     t2.team_name AS away_team, 
     g.game_date, 
-    s.home_score, 
-    s.away_score
+    COALESCE(s.home_score, 0) AS home_score, 
+    COALESCE(s.away_score, 0) AS away_score
 	FROM 
     sports.games g
 	JOIN 
@@ -124,7 +124,7 @@ func (dao *DaoImpl) getGamesByTeamID(id int) ([]*utils.GameScore, error) {
 
 func (dao *DaoImpl) CreateGame(game *utils.Games) error {
 	log.Println("CreateGame")
-	_, err := dao.conn.Exec("INSERT INTO games (home_team_id, away_team_id, game_date) VALUES (?, ?, ?)", game.HomeTeamID, game.AwayTeamID, game.GameDate)
+	_, err := dao.conn.Exec("INSERT INTO games (home_team_id, away_team_id, game_date) VALUES (?, ?, ?)", game.HomeTeamID, game.AwayTeamID, game.GameDate.Format("2006-01-02"))
 	if err != nil {
 		return err
 	}
@@ -133,7 +133,7 @@ func (dao *DaoImpl) CreateGame(game *utils.Games) error {
 
 func (dao *DaoImpl) UpdateGame(game *utils.Games) error {
 	log.Println("UpdateGame")
-	_, err := dao.conn.Exec("UPDATE games SET home_team_id=?, away_team_id=?, game_date=? WHERE id=?", game.HomeTeamID, game.AwayTeamID, game.GameDate, game.ID)
+	_, err := dao.conn.Exec("UPDATE games SET home_id=?, away_id=?, game_date=? WHERE id=?", game.HomeTeamID, game.AwayTeamID, game.GameDate.Format("2006-01-02"), game.ID)
 	if err != nil {
 		return err
 	}

@@ -15,7 +15,7 @@ type ScoresHandler struct {
 func NewScoresHandler(dao ScoresDao, r *mux.Router) *ScoresHandler {
 	h := &ScoresHandler{dao: dao}
 	r.HandleFunc("/api/v1/scores", h.createScore).Methods("POST")
-	r.HandleFunc("/api/v1/scores/{id}", h.updateScore).Methods("PUT")
+	r.HandleFunc("/api/v1/scores/{game_id}", h.updateScore).Methods("PUT")
 	r.HandleFunc("/api/v1/scores/{id}", h.deleteScore).Methods("DELETE")
 	return h
 }

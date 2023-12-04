@@ -18,8 +18,8 @@ func main() {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 
 	// Connection parameters
-	dbUser := "acme"
-	dbPass := "ACM3!"
+	dbUser := "root"
+	dbPass := "vs25wrLd"
 	dbName := "sports"
 	dbHost := "localhost"
 	dbPort := "3306"
