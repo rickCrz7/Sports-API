@@ -95,7 +95,7 @@ func (dao *DaoImpl) getTeamByID(id int) (*utils.Teams, error) {
 
 func (dao *DaoImpl) CreateTeam(team *utils.Teams) error {
 	log.Println("CreateTeam")
-	_, err := dao.conn.Exec("INSERT INTO teams (team_name, sports_id, league_id) VALUES (?, ?, ?)", team.TeamName, team.SportsID, team.LeagueID)
+	_, err := dao.conn.Exec("INSERT INTO teams (team_name, sport_id, league_id) VALUES (?, ?, ?)", team.TeamName, team.SportsID, team.LeagueID)
 	if err != nil {
 		return err
 	}
@@ -104,7 +104,7 @@ func (dao *DaoImpl) CreateTeam(team *utils.Teams) error {
 
 func (dao *DaoImpl) UpdateTeam(team *utils.Teams) error {
 	log.Println("UpdateTeam")
-	_, err := dao.conn.Exec("UPDATE teams SET team_name=?, sports_id=?, league_id=? WHERE id=?", team.TeamName, team.SportsID, team.LeagueID, team.ID)
+	_, err := dao.conn.Exec("UPDATE teams SET team_name=?, sport_id=?, league_id=? WHERE id=?", team.TeamName, team.SportsID, team.LeagueID, team.ID)
 	if err != nil {
 		return err
 	}

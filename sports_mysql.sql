@@ -1,6 +1,5 @@
 -- Drop database if exists
 DROP SCHEMA IF EXISTS sports;
-
 -- Create database if not exists
 CREATE SCHEMA IF NOT EXISTS sports;
 

@@ -1,0 +1,27 @@
+html {
+  font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
+}
+
+body {
+  @apply bg-yellow-1 text-white;
+}
+
+.admin-page {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dashboard {
+  flex: 1;
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  height: 95vh; /* Set height to 75% of viewport height */
+}
+
+.dashboard h2 {
+  text-align: center;
+  @apply text-2xl font-bold;
+}
+

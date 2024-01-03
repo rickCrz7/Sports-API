@@ -12,13 +12,13 @@ type Sports struct {
 type Leagues struct {
 	ID         int    `json:"id"`
 	LeagueName string `json:"league_name"`
-	SportsID   int    `json:"sports_id"`
+	SportsID   int    `json:"sport_id"`
 }
 
 type Teams struct {
 	ID       int    `json:"id"`
 	TeamName string `json:"team_name"`
-	SportsID int    `json:"sports_id"`
+	SportsID int    `json:"sport_id"`
 	LeagueID int    `json:"league_id"`
 }
 

@@ -15,6 +15,7 @@ type Handler struct {
 func NewHandler(dao Dao, r *mux.Router) *Handler {
 	h := &Handler{dao: dao}
 	r.HandleFunc("/api/v1/leagues", h.getAllLeagues).Methods("GET")
+	r.HandleFunc("/api/v1/leagues/sport/{id}", h.getLeagueBySportID).Methods("GET")
 	r.HandleFunc("/api/v1/leagues/{id}", h.getLeagueByID).Methods("GET")
 	r.HandleFunc("/api/v1/leagues", h.createLeague).Methods("POST")
 	r.HandleFunc("/api/v1/leagues/{id}", h.updateLeague).Methods("PUT")
@@ -31,6 +32,20 @@ func (h *Handler) getAllLeagues(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(leagues)
 }
+
+func (h *Handler) getLeagueBySportID(w http.ResponseWriter, r *http.Request) {
+	id := mux.Vars(r)["id"]
+	leagues, err := h.dao.getLeagueBySportID(utils.ConvertToInt(id))
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(leagues)
+}
+
+
 
 func (h *Handler) getLeagueByID(w http.ResponseWriter, r *http.Request) {
 	id := mux.Vars(r)["id"]

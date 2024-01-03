@@ -68,6 +68,8 @@ func (h *Handler) createGame(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	w.WriteHeader(http.StatusCreated)
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(game)
 }
 
 func (h *Handler) updateGame(w http.ResponseWriter, r *http.Request) {

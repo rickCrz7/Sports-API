@@ -18,8 +18,8 @@ func main() {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 
 	// Connection parameters
-	dbUser := "root"
-	dbPass := "vs25wrLd"
+	dbUser := "sports"
+	dbPass := "test"
 	dbName := "sports"
 	dbHost := "localhost"
 	dbPort := "3306"
@@ -47,6 +47,10 @@ func main() {
 	games.NewHandler(games.NewDao(conn), r)
 	games.NewScoresHandler(games.NewScoresDao(conn), r)
 
-	log.Println("Starting server on port 8080")
-	log.Fatal(http.ListenAndServe(":8080", r))
+	log.Printf("server running on port 80")
+	srv := &http.Server{
+		Handler: r,
+		Addr:    ":80",
+	}
+	log.Fatal(srv.ListenAndServe())
 }
