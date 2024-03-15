@@ -3,7 +3,37 @@ html {
 }
 
 body {
-  @apply bg-yellow-1 text-white;
+  background: linear-gradient(to bottom, #f5f5f5, #e0e0e0);
+  @apply text-white;
+}
+
+.dark-mode {
+  background: linear-gradient(to bottom, #222222, #0f0f0f);
+  @apply text-white;
+}
+
+.dark-mode .dashboard h2 {
+  @apply text-white;
+}
+
+.dark-mode .select {
+  @apply hover:bg-gray-500 p-2 rounded cursor-pointer flex justify-between
+}
+
+.dark-mode .button-color {
+  @apply text-white;
+}
+
+.dark-mode .title {
+  @apply text-5xl text-white;
+}
+
+.dark-mode .action-buttons {
+  @apply bg-white w-full rounded-xl text-black;
+}
+
+.dark-mode .secondary-action-buttons {
+  @apply bg-gray-500 rounded-xl text-white px-2;
 }
 
 .admin-page {
@@ -25,3 +55,59 @@ body {
   @apply text-2xl font-bold;
 }
 
+.select {
+  @apply hover:bg-white cursor-pointer flex justify-between p-2 rounded
+}
+
+.title {
+  @apply text-5xl;
+}
+
+.action-buttons {
+  @apply bg-blue w-full rounded-xl text-white;
+}
+
+.secondary-action-buttons {
+  @apply bg-blue-5 rounded-xl text-white px-3 my-1 text-2xl flex items-center;
+}
+
+.input-group>input[type='text'],
+.input-group>input[type='password'],
+.input-group>input[type='email'],
+.input-group>input[type='number'],
+.input-group>input[type='url'],
+.input-group>input[type='date'],
+.input-group>input[type='datetime-local'],
+.input-group>input[type='month'],
+.input-group>input[type='week'],
+.input-group>input[type='time'],
+.input-group>input[type='search'],
+.input-group>input[type='tel'],
+.input-group>input[type='checkbox'],
+.input-group>input[type='radio'],
+.input-group>select,
+.input-group>select[multiple],
+.input-group>textarea {
+  @apply mt-1 block w-full rounded-md h-14 text-xl tracking-wider bg-gray-100 border-transparent 
+  focus:border-gray-500 focus:bg-white focus:ring-2 focus:ring-secondary focus:text-gray-700 border-gray-300;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+  .admin-page {
+    flex-direction: column;
+  }
+
+  .dashboard {
+    margin: 10px;
+    padding: 10px;
+  }
+
+  .dashboard h2 {
+    @apply text-xl;
+  }
+
+  .title {
+    @apply text-4xl;
+  }
+}

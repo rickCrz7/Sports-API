@@ -27,6 +27,11 @@ const routes = [
         path: '/update/score/:id',
         name: 'UpdateScore',
         component: () => import('./views/UpdateScore.vue')
+    },
+    {
+        path: '/edit/:id',
+        name: 'Edit',
+        component: () => import('./views/EditName.vue')
     }
 ]
 

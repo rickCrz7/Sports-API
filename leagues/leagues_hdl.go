@@ -45,8 +45,6 @@ func (h *Handler) getLeagueBySportID(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(leagues)
 }
 
-
-
 func (h *Handler) getLeagueByID(w http.ResponseWriter, r *http.Request) {
 	id := mux.Vars(r)["id"]
 	league, err := h.dao.getLeagueByID(utils.ConvertToInt(id))
@@ -74,12 +72,14 @@ func (h *Handler) createLeague(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) updateLeague(w http.ResponseWriter, r *http.Request) {
+	id := mux.Vars(r)["id"]
 	league := &utils.Leagues{}
 	err := json.NewDecoder(r.Body).Decode(league)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
+	league.ID = utils.ConvertToInt(id)
 	err = h.dao.UpdateLeague(league)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)

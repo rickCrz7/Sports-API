@@ -1,6 +1,6 @@
 <template>
     <div class="flex justify-center items-center">
-        <div>
+        <div class="input-group flex gap-1">
             <input
                 v-model="homeScore"
                 type="number"
@@ -11,8 +11,8 @@
                 type="number"
                 placeholder="Enter away score"
             />
-            <button class="bg-blue text-white p-2" @click="addScore">
-                Add
+            <button class="secondary-action-buttons" @click="addScore">
+                <i class="i-mdi:plus"></i>
             </button>
         </div>
     </div>

@@ -1,13 +1,13 @@
 <template>
     <div class="flex justify-center items-center">
-        <div>
+        <div class="input-group flex gap-1">
             <input
                 v-model="sportName"
                 type="text"
                 placeholder="Enter sport name"
             />
-            <button class="bg-blue text-white p-2" @click="addSport">
-                Add
+            <button class="secondary-action-buttons" @click="addSport">
+                <i class="i-mdi:plus"></i>
             </button>
         </div>
     </div>

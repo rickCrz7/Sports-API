@@ -1,6 +1,6 @@
 <template>
     <div class="flex justify-center items-center">
-        <div>
+        <div class="input-group flex gap-1">
             <select v-model="sports_id">
                 <option value="" disabled selected>Select sport</option>
                 <option
@@ -16,8 +16,8 @@
                 type="text"
                 placeholder="Enter league name name"
             />
-            <button class="bg-blue text-white p-2" @click="addLeague">
-                Add
+            <button class="secondary-action-buttons" @click="addLeague">
+                <i class="i-mdi:plus"></i>
             </button>
         </div>
     </div>
