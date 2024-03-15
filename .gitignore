@@ -1,0 +1,13 @@
+.DS_Store
+.vscode
+.idea
+.realize.yaml
+Sports-API
+node_modules
+
+release/config
+release/app
+
+
+sqltools_*
+*.log
