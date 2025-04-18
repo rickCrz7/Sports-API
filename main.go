@@ -2,9 +2,9 @@ package main
 
 import (
 	"database/sql"
-	"fmt"
-	"log"
 	"net/http"
+
+	log "github.com/sirupsen/logrus"
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/gorilla/mux"
@@ -12,23 +12,21 @@ import (
 	"github.com/rickCrz7/Sports-API/leagues"
 	"github.com/rickCrz7/Sports-API/sports"
 	"github.com/rickCrz7/Sports-API/teams"
+	"github.com/spf13/viper"
 )
 
 func main() {
-	log.SetFlags(log.LstdFlags | log.Lshortfile)
-
-	// Connection parameters
-	dbUser := "sports"
-	dbPass := "test"
-	dbName := "sports"
-	dbHost := "localhost"
-	dbPort := "3306"
-
-	// Construct the MySQL DSN (Data Source Name)
-	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", dbUser, dbPass, dbHost, dbPort, dbName)
+	// Load configuration from config file
+	viper.SetConfigName("app")
+	viper.AddConfigPath("config")
+	err := viper.ReadInConfig()
+	if err != nil {
+		panic(err)
+	}
 
 	// Open a connection to the MySQL database
-	conn, err := sql.Open("mysql", dsn)
+	db := viper.GetString("db.url")
+	conn, err := sql.Open("mysql", db)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -40,6 +38,7 @@ func main() {
 		log.Fatal(err)
 	}
 
+	// Set up the HTTP server and routes using Gorilla Mux
 	r := mux.NewRouter()
 	sports.NewHandler(sports.NewDao(conn), r)
 	leagues.NewHandler(leagues.NewDao(conn), r)
@@ -47,10 +46,12 @@ func main() {
 	games.NewHandler(games.NewDao(conn), r)
 	games.NewScoresHandler(games.NewScoresDao(conn), r)
 
-	log.Printf("server running on port 80")
+	// Set up the server and start listening for requests
+	addr := viper.GetString("app.addr")
 	srv := &http.Server{
 		Handler: r,
-		Addr:    ":80",
+		Addr:    addr,
 	}
+	log.Infof("Server running on port %s", addr)
 	log.Fatal(srv.ListenAndServe())
 }

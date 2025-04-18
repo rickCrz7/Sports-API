@@ -5,9 +5,8 @@
 Sports-API
 node_modules
 
-release/config
+config
 release/app
-
 
 sqltools_*
 *.log
